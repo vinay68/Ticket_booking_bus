@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #6200ea;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: #6200ea;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 97%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #6200ea;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        .status {
+            padding: 1rem;
+            border-radius: 4px;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        .box1{
+            color: #ff8f05;
+            margin-top: 30px;
+        }
+        .box2{
+            color: white;
+            margin-top: 30px;
+        }
+        .box3{
+            color: #03fc20;
+            margin-top: 30px;
+        }
+        .logo{
+            text-align:left;
+            font-size: 20px;
+        }
+        .heading{
+            margin-left: 370px;
+            font-size: 30px;
+        }
+        footer{
+            color: white;
+            margin-top: 350px;
+            background-color: black;
+            height: 80px;
+        }
+        p{
+           text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo"><span class="box1">Speed</span><span class="box2">star</span><span class="box3">Travels</span><span class="heading">Coustmer Service Request</span></h1>
+    </header>
+    <main>
+        <section id="capture-information">
+            <h2>Capture Information</h2>
+            <label for="info-type">Information Type</label>
+            <select id="info-type">
+                <option value="general">General Inquiry</option>
+                <option value="technical">Technical Issue</option>
+                <option value="billing">Billing Issue</option>
+            </select>
+            <label for="info-details">Details</label>
+            <input type="text" id="info-details" placeholder="Enter details">
+            <button onclick="captureInformation()">Capture Information</button>
+        </section>
+
+        <section id="handle-request">
+            <h2>Handle Request</h2>
+            <label for="request-id">Request ID</label>
+            <input type="text" id="request-id" placeholder="Enter Request ID">
+            <button onclick="handleRequest()">Handle Request</button>
+            <div id="request-status" class="status" style="display: none;"></div>
+        </section>
+
+        <section id="resolve-query">
+            <h2>Resolve Query</h2>
+            <label for="query-id">Query ID</label>
+            <input type="text" id="query-id" placeholder="Enter Query ID">
+            <button onclick="resolveQuery()">Resolve Query</button>
+            <button type="back"><a href="service.html">Back</a></button>
+            <div id="query-resolution" class="status" style="display: none;"></div>
+        </section>
+    </main>
+    <footer>
+        <hr>
+        <p>@2025 SpeedstarTravels Pvt Ltd.All rights reserved</p>
+        <p>
+            <span style="margin-left:10px;"><i class="fa-brands fa-facebook"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-linkedin"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-x-twitter"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-square-instagram"></i></span>
+        </p>
+    </footer>
+     <script>
+  // Simulated in-memory storage
+  const infoDatabase = {};
+  const requestDatabase = {};
+  const queryDatabase = {};
+
+  // Capture Information
+  function captureInformation() {
+    const type = document.getElementById("info-type").value;
+    const details = document.getElementById("info-details").value.trim();
+
+    if (!details) {
+      alert("❌ Please enter details for the inquiry.");
+      return;
+    }
+
+    const infoId = "INFO" + Date.now();
+    infoDatabase[infoId] = { type, details };
+
+    alert(`✅ Information captured.\nType: ${type}\nDetails: ${details}\nGenerated ID: ${infoId}`);
+    document.getElementById("info-details").value = "";
+  }
+
+  // Handle Request
+  function handleRequest() {
+    const requestId = document.getElementById("request-id").value.trim().toUpperCase();
+    const statusBox = document.getElementById("request-status");
+
+    if (!requestId) {
+      alert("❌ Please enter a valid Request ID.");
+      return;
+    }
+
+    // Simulate storing request as handled
+    requestDatabase[requestId] = "Handled";
+
+    const msg = `📌 Request ID "${requestId}" has been marked as HANDLED.`;
+    statusBox.innerHTML = msg;
+    statusBox.style.display = "block";
+    alert(`✅ ${msg}`);
+    document.getElementById("request-id").value = "";
+  }
+
+  // Resolve Query
+  function resolveQuery() {
+    const queryId = document.getElementById("query-id").value.trim().toUpperCase();
+    const resolutionBox = document.getElementById("query-resolution");
+
+    if (!queryId) {
+      alert("❌ Please enter a valid Query ID.");
+      return;
+    }
+
+    // Simulate storing query resolution
+    queryDatabase[queryId] = "Resolved";
+
+    const msg = `✅ Query ID "${queryId}" has been resolved successfully.`;
+    resolutionBox.innerHTML = msg;
+    resolutionBox.style.display = "block";
+    alert(msg);
+    document.getElementById("query-id").value = "";
+  }
+</script>
+
+</body>
+</html>

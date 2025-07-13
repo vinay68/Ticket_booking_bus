@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boarding Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <style>
+        /* Same CSS as before */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            margin-top: 30px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .confirmation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #e7f7e7;
+            color: #2b542b;
+            border: 1px solid #d6e9c6;
+            border-radius: 4px;
+        }
+        .error {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+            border-radius: 4px;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+        .box1{
+            color: #ff8f05;
+            margin-top: 30px;
+        }
+        .box2{
+            color: white;
+            margin-top: 30px;
+        }
+        .box3{
+            color: #03fc20;
+            margin-top: 30px;
+        }
+        .logo{
+            text-align:left;
+            font-size: 20px;
+        }
+        .heading{
+            margin-left: 370px;
+            font-size: 30px;
+        }
+        footer{
+            color: white;
+            margin-top: 350px;
+            background-color: black;
+            height: 80px;
+        }
+        p{
+           text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+      <h1 class="logo"><span class="box1">Speed</span><span class="box2">star</span><span class="box3">Travels</span><span class="heading">Boarding Management System</span></h1>   
+    </header>
+    <main>
+        <h2>Boarding Process Form</h2>
+        <!-- Form submits to the PHP script -->
+        <form id="boardingForm">
+            <div class="form-group">
+                <label for="passengerName">Passenger Name</label>
+                <input type="text" id="passengerName" name="passengerName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="documentVerification">Document Verification</label>
+                <select id="documentVerification" name="documentVerification">
+                    <option value="Verified">Verified</option>
+                    <option value="Pending">Pending</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="baggageDetails">Baggage Details</label>
+                <input type="text" id="baggageDetails" name="baggageDetails" placeholder="Baggage Weight (kg)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="boardingStatus">Boarding Coordination</label>
+                <select id="boardingStatus" name="boardingStatus">
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </div>
+
+            <button type="submit">Complete Boarding</button>
+            <br>
+            <button type="back"><a href="service.html">Back</a></button>
+        </form>
+
+    </main>
+    <footer>
+        <hr>
+        <p>@2025 SpeedstarTravels Pvt Ltd.All rights reserved</p>
+        <p>
+            <span style="margin-left:10px;"><i class="fa-brands fa-facebook"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-linkedin"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-x-twitter"></i></span>
+            <span style="margin-left:10px;"><i class="fa-brands fa-square-instagram"></i></span>
+        </p>
+    </footer>
+    <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("boardingForm");
+
+    form.addEventListener("submit", function (e) {
+      const passengerName = document.getElementById("passengerName").value.trim();
+      const documentVerification = document.getElementById("documentVerification").value;
+      const baggageDetails = document.getElementById("baggageDetails").value.trim();
+      const boardingStatus = document.getElementById("boardingStatus").value;
+
+      // Validate passenger name
+      if (passengerName === "") {
+        alert("Passenger name is required.");
+        e.preventDefault();
+        return;
+      }
+
+      // Validate baggage as a number
+      const baggageWeight = parseFloat(baggageDetails);
+      if (isNaN(baggageWeight) || baggageWeight <= 0) {
+        alert("Please enter a valid baggage weight in kg.");
+        e.preventDefault();
+        return;
+      }
+
+      // Confirmation (optional – remove if server handles confirmation)
+      const confirmMsg = `
+      ✅ Boarding Completed!
+
+      Name: ${passengerName}
+      Document Status: ${documentVerification}
+      Baggage: ${baggageWeight} kg
+      Boarding: ${boardingStatus}
+      `;
+      alert(confirmMsg);
+      // Allow form to submit to PHP after alert
+    });
+  });
+</script>
+
+</body>
+</html>

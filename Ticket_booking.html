@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Booking</title>
+  <link rel="stylesheet" href="project.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+</head>
+<body>
+  <header>
+      <h1 class="logo" style="text-align:left;font-size: 20px;"><span class="box1" style="color: #ff8f05;margin-top: 30px;margin-left: 15px;">Speed</span>
+      <span class="box2" style=" color: white;margin-top: 30px;">star</span>
+      <span class="box3" style="color:#03fc20;margin-top: 30px;">Travels</span>
+      <span class="heading" style="margin-left: 370px;font-size: 30px;">Book Your Bus Ticket</span></h1>
+  </header>
+  <main>
+    <form id="booking-form">
+      <div class="form-group">
+        <label for="from">From:</label>
+        <input type="text" id="from" placeholder="Enter Departure City" required>
+        <ul id="from-suggestions" class="suggestions-list hidden"></ul>
+      </div>
+      <div class="form-group">
+        <label for="to">To:</label>
+        <input type="text" id="to" placeholder="Enter Destination City" required>
+        <ul id="to-suggestions" class="suggestions-list hidden"></ul>
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+      </div>
+      <div class="form-group">
+        <label for="seats">Number of Seats:</label>
+        <input type="number" id="seats" min="1" max="10" required>
+      </div>
+      <!-- <button type="submit"><a href="bus_list.html">Search Buses</a></button> -->
+       <button type="submit">Search Buses</button>
+    </form>
+    <div id="booking-result" class="hidden">
+      <h2>Available Buses</h2>
+      <ul id="bus-list"></ul>
+    </div>
+  </main>
+  <footer style="color: white;margin-top: 350px;background-color: black;height: 80px;">
+    <hr>
+    <p style="text-align: center;">@2025 SpeedstarTravels Pvt Ltd.All rights reserved</p>
+    <p>
+      <span style="margin-left:10px;"><i class="fa-brands fa-facebook"></i></span>
+      <span style="margin-left:10px;"><i class="fa-brands fa-linkedin"></i></span>
+      <span style="margin-left:10px;"><i class="fa-brands fa-x-twitter"></i></span>
+      <span style="margin-left:10px;"><i class="fa-brands fa-square-instagram"></i></span>
+    </p>
+</footer>
+ 
+<script>
+document.getElementById("booking-form").addEventListener("submit", function(e) {
+  e.preventDefault(); // prevent actual form submission
+
+  const from = document.getElementById("from").value.trim();
+  const to = document.getElementById("to").value.trim();
+  const date = document.getElementById("date").value;
+  const seats = document.getElementById("seats").value;
+
+  if (!from || !to || !date || !seats) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  // Save values in localStorage
+  localStorage.setItem("bookingDetails", JSON.stringify({
+    from,
+    to,
+    date,
+    seats
+  }));
+
+  // Redirect to bus list page
+  window.location.href = "bus_list.html";
+});
+</script>
+
+</body>
+</html>

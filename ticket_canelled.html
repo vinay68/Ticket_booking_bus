@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancel Ticket</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background-color:black;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    input{
+      width: 97%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      width: 30%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color:  #d32f2f;
+      color: white;
+      cursor: pointer;
+      margin-left: 100px;
+    }
+    button:hover {
+      background-color:  #b71c1c;
+    }
+    #cancel-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 4px;
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      display: none;
+    }
+    .error {
+      padding: 1rem;
+      border-radius: 4px;
+      background-color: #f8d7da;
+      color: #842029;
+      display: none;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+    }
+    .box1{
+            color: #ff8f05;
+            margin-top: 30px;
+        }
+        .box2{
+            color: white;
+            margin-top: 30px;
+        }
+        .box3{
+            color: #03fc20;
+            margin-top: 30px;
+        }
+        .logo{
+            text-align:left;
+            font-size: 20px;
+        }
+        .heading{
+            margin-left: 370px;
+            font-size: 30px;
+        }
+        footer{
+            color: white;
+            margin-top: 350px;
+            background-color: black;
+            height: 80px;
+        }
+        p{
+           text-align: center;
+        }
+  </style>
+</head>
+<body>
+  <header>
+     <h1 class="logo"><span class="box1">Speed</span><span class="box2">star</span><span class="box3">Travels</span><span class="heading">Cancel Your Ticket</span></h1>
+  </header>
+  <main>
+    <form id="cancel-form">
+      <div class="form-group">
+        <label for="ticket-id">Ticket ID:</label>
+        <input type="text" id="ticket-id" placeholder="Enter Ticket ID" required>
+      </div>
+      <button type="submit">Cancel Ticket</button>
+      <button type="back"><a href="service.html">Back</a></button>
+    </form>
+    <div id="cancel-result">
+      <p>Your ticket has been successfully cancelled.</p>
+    </div>
+    <div id="error-message" class="error">
+      <p>Ticket ID not found. Please try again.</p>
+    </div>
+  </main>
+  <footer>
+        <hr>
+        <p>@2025 SpeedstarTravels Pvt Ltd.All rights reserved</p>
+        <p>
+          <span style="margin-left:10px;"><i class="fa-brands fa-facebook"></i></span>
+          <span style="margin-left:10px;"><i class="fa-brands fa-linkedin"></i></span>
+          <span style="margin-left:10px;"><i class="fa-brands fa-x-twitter"></i></span>
+          <span style="margin-left:10px;"><i class="fa-brands fa-square-instagram"></i></span>
+        </p>
+    </footer>
+    <script>
+  // Store cancelled tickets to avoid duplicate cancellation
+  const cancelledTickets = new Set();
+
+  document.getElementById("cancel-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const ticketId = document.getElementById("ticket-id").value.trim().toUpperCase();
+    const successBox = document.getElementById("cancel-result");
+    const errorBox = document.getElementById("error-message");
+
+    if (ticketId === "") {
+      alert("❌ Please enter a valid Ticket ID.");
+      showError("Ticket ID cannot be empty.");
+      return;
+    }
+
+    if (cancelledTickets.has(ticketId)) {
+      alert("⚠️ Ticket has already been cancelled.");
+      showError(`Ticket "${ticketId}" was already cancelled.`);
+      return;
+    }
+
+    // Simulate success
+    cancelledTickets.add(ticketId);
+    showSuccess(`Your ticket "${ticketId}" has been successfully cancelled.`);
+    alert(`✅ Ticket "${ticketId}" cancelled successfully.`);
+  });
+
+  function showSuccess(message) {
+    const successBox = document.getElementById("cancel-result");
+    const errorBox = document.getElementById("error-message");
+    successBox.querySelector("p").textContent = message;
+    successBox.style.display = "block";
+    errorBox.style.display = "none";
+  }
+
+  function showError(message) {
+    const successBox = document.getElementById("cancel-result");
+    const errorBox = document.getElementById("error-message");
+    errorBox.querySelector("p").textContent = message;
+    errorBox.style.display = "block";
+    successBox.style.display = "none";
+  }
+</script>
+
+</body>
+</html>

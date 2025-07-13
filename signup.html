@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #07f7d3, #ebf707);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    main {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 97%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #d32f2f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 90px;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Signup</h1>
+  </header>
+  <main>
+    <form id="signup-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter Username" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+      </div>
+      <button type="submit">Signup</button>
+      <button><a href="home.html" style="text-decoration:none;color:white;">Back</a></button>
+    </form>
+    <p id="signup-result" class="hidden"></p>
+  </main>
+
+  <script>
+  document.getElementById("signup-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const resultBox = document.getElementById("signup-result");
+
+    if (username === "" || email === "" || password === "") {
+      showResult("❌ Please fill in all fields.", false);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      showResult("❌ Please enter a valid email address.", false);
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      showResult("❌ Password must contain 1 uppercase, 1 number, and 1 special character.", false);
+      return;
+    }
+
+    // ✅ Save all values to localStorage
+    localStorage.setItem("userProfile", JSON.stringify({ username, email, password }));
+
+    showResult(`✅ Signup successful! Redirecting to Home...`, true);
+
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 2000);
+  });
+
+  function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  function validatePassword(password) {
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    return hasUppercase && hasNumber && hasSpecialChar;
+  }
+
+  function showResult(message, isSuccess) {
+    const resultBox = document.getElementById("signup-result");
+    resultBox.textContent = message;
+    resultBox.style.display = "block";
+    resultBox.style.color = isSuccess ? "green" : "red";
+  }
+</script>
+
+
+
+</body>
+</html>

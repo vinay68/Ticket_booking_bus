@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #f7ef0a, #45f70a);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    main {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 97%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    button {
+      background-color: #f70a26;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 90px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #b71c1c;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Login</h1>
+  </header>
+
+  <main>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter Username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required />
+      </div>
+      <p style="text-align:center;">Don't have an account? <a href="signup.html" style="color:blue;">Sign up here</a></p>
+
+
+      <button type="submit">Login</button>
+      <button type="button"><a href="home.html">Back</a></button>
+    </form>
+
+    <div class="error" id="error-msg"></div>
+  </main>
+
+  <script>
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const enteredUsername = document.getElementById("username").value.trim();
+    const enteredPassword = document.getElementById("password").value.trim();
+
+    const storedUser = JSON.parse(localStorage.getItem("userProfile"));
+
+    if (!storedUser) {
+      alert("❌ No user found. Please sign up first.");
+      return;
+    }
+
+    const hasUppercase = /[A-Z]/.test(enteredPassword);
+    const hasNumber = /[0-9]/.test(enteredPassword);
+    const hasSpecialChar = /[!@#$%^&*(),.?\":{}|<>]/.test(enteredPassword);
+
+    if (!hasUppercase || !hasNumber || !hasSpecialChar) {
+      alert("❌ Password must contain at least one uppercase letter, one number, and one special character.");
+      return;
+    }
+
+    if (
+      enteredUsername === storedUser.username &&
+      enteredPassword === storedUser.password
+    ) {
+      alert("✅ Login successful!");
+      window.location.href = "home.html";
+    } else {
+      alert("❌ Invalid username or password.");
+    }
+  });
+</script>
+
+
+  
+</body>
+</html>
+
