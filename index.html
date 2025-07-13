@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url(HDbackground_img.jpg);
+      background-size: cover;
+      background-position: right top;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .nav {
+      background-color: #000;
+      padding: 25px 50px;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .brand a {
+      color: #ff8f05;
+      font-size: 30px;
+      text-decoration: none;
+    }
+
+    .brand span:nth-child(2) {
+      color: whitesmoke;
+    }
+
+    .brand span:nth-child(3) {
+      color: #03fc20;
+    }
+
+    ul.nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul.nav-links li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 14px;
+      transition: all 0.3s ease;
+    }
+
+    ul.nav-links li a:hover {
+      color: red;
+      text-decoration: underline;
+      text-underline-offset: 10px;
+      text-decoration-color: red;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-actions button {
+      background-color: rgb(22, 201, 236);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .nav-actions button:hover {
+      background-color: rgb(236, 22, 33);
+      color: white;
+    }
+
+    .nav-actions button a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .nav-actions i {
+      color: white;
+      font-size: 30px;
+    }
+
+    section {
+      color: white;
+      margin-left: 160px;
+      margin-top: 180px;
+    }
+
+    section h1 {
+      font-size: 60px;
+    }
+
+    section h1 span:nth-child(3) {
+      color: red;
+      font-size: 40px;
+    }
+
+    section button {
+      margin-top: 30px;
+      height: 50px;
+      border-radius: 12px;
+      background-color: rgb(22, 201, 236);
+      border: none;
+      cursor: pointer;
+    }
+
+    section button:hover {
+      background-color: rgb(236, 22, 33);
+    }
+
+    section button a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .fade-change {
+      animation: fade 0.6s ease-in-out;
+    }
+
+    @keyframes fade {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="brand">
+        <a href="#">
+          <span>Speed</span>
+          <span>star</span>
+          <span data-key="companyName">Travels</span>
+        </a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#" class="home">HOME</a></li>
+        <li><a href="service.html" class="services">SERVICES</a></li>
+        <li><a href="contact.html" class="contact">CONTACT</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button><a href="signup.html" class="signup">Signup</a></button>
+        <button><a href="login.html" class="login">Login</a></button>
+        <i class="fa-solid fa-circle-user"></i>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <h1>
+      <span data-key="welcome">Welcome</span><br>
+      <span data-key="to">To,</span>
+      <span data-key="CName">Speedstar Travel</span>
+    </h1>
+    <p data-key="slogan">Travel in Comfort, Arrive in Style. Your safe journey is our main goal!</p>
+    <button>
+      <a href="Ticket_booking.html" class="buyTicket">BUY YOUR TICKET</a>
+    </button>
+  </section>
+
+  <script>
+    const translations = {
+      en: {
+        welcome: "Welcome",
+        to: "To,",
+        CName: "Speedstar Travel",
+        slogan: "Travel in Comfort, Arrive in Style. Your safe journey is our main goal!",
+      },
+      te: {
+        welcome: "స్వాగతం",
+        to: "కు,",
+        CName: "స్పీడ్స్టార్ ట్రావెల్",
+        slogan: "ఆరామంగా ప్రయాణించండి, స్టైల్లో చేరండి. మీ సురక్షిత ప్రయాణమే మా లక్ష్యం!",
+      },
+      hi: {
+        welcome: "स्वागत है",
+        to: "को,",
+        CName: "स्पीडस्टार ट्रैवल",
+        slogan: "आराम से यात्रा करें, स्टाइल में पहुंचें। आपकी सुरक्षित यात्रा हमारा लक्ष्य है!",
+      },
+      ta: {
+        welcome: "வரவேற்கிறோம்",
+        to: "க்கு,",
+        CName: "ஸ்பீட்ஸ்டார் பயணங்கள்",
+        slogan: "ஆராமமாக பயணம் செய்யுங்கள், ஸ்டைலாக வரவேற்க்கபடுங்கள். உங்கள் பாதுகாப்பான பயணமே எங்கள் நோக்கம்!",
+      },
+      ml: {
+        welcome: "സ്വാഗതം",
+        to: "ക്ക്,",
+        CName: "സ്പീഡ്സ്റ്റാർ ട്രാവൽസ്",
+        slogan: "ആറാമമായി യാത്രചെയ്യുക, സ്‌റ്റൈലായി എത്തുക. നിങ്ങളുടെ സുരക്ഷിത യാത്രയാണ് ഞങ്ങളുടെ ലക്ഷ്യം!",
+      },
+      kn: {
+        welcome: "ಸ್ವಾಗತ",
+        to: "ಗೆ,",
+        CName: "ಸ್ಪೀಡ್ಸ್ಟಾರ್ ಟ್ರಾವೆಲ್ಸ್",
+        slogan: "ಆರಾಮದಾಯಕವಾಗಿ ಪ್ರಯಾಣಿಸಿ, ಶೈಲಿಯಲ್ಲಿ ತಲುಪಿರಿ. ನಿಮ್ಮ ಸುರಕ್ಷಿತ ಪ್ರಯಾಣವೇ ನಮ್ಮ ಗುರಿ!",
+      }
+    };
+
+    const languageCodes = ["en", "te", "hi", "ta", "ml", "kn"];
+    let currentIndex = 0;
+
+    function changeLanguage(lang) {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang][key]) {
+          el.classList.remove('fade-change');
+          void el.offsetWidth;
+          el.textContent = translations[lang][key];
+          el.classList.add('fade-change');
+        }
+      });
+    }
+
+    function autoRotateLanguage() {
+      const nextLang = languageCodes[currentIndex];
+      changeLanguage(nextLang);
+      currentIndex = (currentIndex + 1) % languageCodes.length;
+    }
+
+    autoRotateLanguage(); // initial
+    setInterval(autoRotateLanguage, 6000); // every 10 seconds
+  </script>
+</body>
+</html>
